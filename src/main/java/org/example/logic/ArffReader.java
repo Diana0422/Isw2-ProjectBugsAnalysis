@@ -31,12 +31,12 @@ public class ArffReader {
         String [] values;
 
         // read original dataset and write on new arff file
-        try (BufferedReader reader = new BufferedReader(new FileReader(filenameIn));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(filenameOut))) {
-            while ((line = reader.readLine()) != null) {
+        try (BufferedReader read = new BufferedReader(new FileReader(filenameIn));
+             BufferedWriter write = new BufferedWriter(new FileWriter(filenameOut))) {
+            while ((line = read.readLine()) != null) {
                 if (line.contains(ATTRIBUTE_HEADER) || line.contains(RELATION_HEADER) || line.contains(DATA_HEADER) || line.equals("")) {
-                    writer.append(line);
-                    writer.newLine();
+                    write.append(line);
+                    write.newLine();
                 } else {
                     newLine = line;
                     values = newLine.split(",");
@@ -45,8 +45,8 @@ public class ArffReader {
 
                     /* Copy lines that have release that happen before the testing set release */
                     if (currentRelease <= maxRelease-1) {
-                        writer.append(line);
-                        writer.newLine();
+                        write.append(line);
+                        write.newLine();
                     } else {
                         break;	// testing set release comes later
                     }

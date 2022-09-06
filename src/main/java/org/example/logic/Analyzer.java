@@ -36,11 +36,10 @@ public class Analyzer {
         // attribute selection
         FeatureSelection fs;
 
+        // new result record
+        Record result = new Record(dataset, numReleases, percTraining, percDefTraining, percDefTesting);
+
         try {
-            // new result record
-            Record result = new Record(dataset, numReleases, percTraining, percDefTraining, percDefTesting);
-
-
             // no selection
             fs = new NoSelection(trainSource, testSource);
             pipe.setFeatureSel(fs, result);

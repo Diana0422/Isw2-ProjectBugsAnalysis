@@ -1,10 +1,7 @@
 package org.example.logic;
 import org.example.logic.balancing.*;
 import org.example.logic.classification.Classification;
-import org.example.logic.exceptions.BalancingException;
-import org.example.logic.exceptions.ClassificationException;
-import org.example.logic.exceptions.EvaluationException;
-import org.example.logic.exceptions.PipelineException;
+import org.example.logic.exceptions.*;
 import org.example.logic.selection.FeatureSelection;
 import org.example.logic.sensitivity.NoSensitivity;
 import org.example.logic.sensitivity.SensitiveLearning;
@@ -86,7 +83,7 @@ public class Pipeline {
         }
     }
 
-    private void pipelineClassification(Record result) throws PipelineException {
+    public void pipelineClassification(Record result) throws PipelineException {
 
         try {
             // classification
@@ -96,18 +93,23 @@ public class Pipeline {
             // ibk
             c.setIbkClassifier(result);
             pipelineSensitivity(c, result);
+            evaluation(result);
 
             // naive bayes
             c.setNaiveBayesClassifier(result);
             pipelineSensitivity(c, result);
+            evaluation(result);
 
 
             // random forest
             c.setRandomForestClassifier(result);
             pipelineSensitivity(c, result);
+            evaluation(result);
 
         } catch (ClassificationException e) {
             throw new PipelineException(e);
+        } catch (EvaluationException e) {
+            e.printStackTrace();
         }
     }
 
@@ -133,7 +135,6 @@ public class Pipeline {
             newResult.setRecall(eval.recall(1));
             newResult.setAuc(eval.areaUnderROC(1));
             newResult.setKappa(eval.kappa());
-
             results.add(newResult);
         } catch (Exception e) {
             throw new EvaluationException(e.getCause());

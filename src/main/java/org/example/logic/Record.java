@@ -19,9 +19,9 @@ public class Record {
     private double auc; // auc metric
     private double kappa; // kappa metric
 
-    public Record(String datasetName, int numReleases, float percTraining, float percDefTraining, float percDefTesting) {
+    public Record(String datasetName, int numTrainingReleases, float percTraining, float percDefTraining, float percDefTesting) {
         this.dataset = datasetName;
-        this.numTrainingReleases = numReleases;
+        this.numTrainingReleases = numTrainingReleases;
         this.percentTraining = percTraining;
         this.percentDefTesting = percDefTesting;
         this.percentDefTraining = percDefTraining;

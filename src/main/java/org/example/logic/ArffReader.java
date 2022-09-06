@@ -18,6 +18,13 @@ public class ArffReader {
 
     private ArffReader() {}
 
+    /**
+     * Creates the ARFF file for the training set, implementing WalkForward technique
+     * @param filenameIn arff file to read (whole dataset)
+     * @param filenameOut arff file to write (the training set)
+     * @param maxRelease the index of the release to include in the testing set
+     * @return DataSource representing the training set
+     */
     public static DataSource createTrainingSet(String filenameIn, String filenameOut, int maxRelease) throws DatasetCreationException, ArffException {
         String line;
         String newLine;
@@ -36,11 +43,12 @@ public class ArffReader {
 
                     int currentRelease = Integer.parseInt(values[0]);
 
+                    /* Copy lines that have release that happen before the testing set release */
                     if (currentRelease <= maxRelease-1) {
                         writer.append(line);
                         writer.newLine();
                     } else {
-                        break;	// current release comes later
+                        break;	// testing set release comes later
                     }
                 }
             }
@@ -59,6 +67,13 @@ public class ArffReader {
         }
     }
 
+    /**
+     * Creates the ARFF file for the testing set, implementing the WalkForward technique
+     * @param filenameIn arff file to read (whole dataset)
+     * @param filenameOut arff file to write (the testing set)
+     * @param maxRelease the testing set release
+     * @return DataSource representing the testing set
+     */
     public static DataSource createTestingSet(String filenameIn, String filenameOut, int maxRelease) throws DatasetCreationException, ArffException {
         String line;
         String newLine;
@@ -76,6 +91,7 @@ public class ArffReader {
                     values = line.split(",");
                     int currentRelease = Integer.parseInt(values[0]);
 
+                    /* Copy only the lines with files in release expected (based on WalkForward) */
                     if (currentRelease == maxRelease) {
                         writer.append(newLine);
                         writer.newLine();
@@ -103,7 +119,7 @@ public class ArffReader {
         String line;
         String [] values;
 
-        // read original dataset and write on new arff file
+        // read original dataset and write infos on files
         try (BufferedReader reader = new BufferedReader(new FileReader(filenameIn))) {
             while ((line = reader.readLine()) != null) {
                 if (!line.contains(ATTRIBUTE_HEADER) && !line.contains(RELATION_HEADER) && !line.contains(DATA_HEADER) && !line.equals("")) {
@@ -112,7 +128,7 @@ public class ArffReader {
                     int num = Integer.parseInt(values[0])-1;
                     releases[num]++; // add the release to array
 
-                    if (values[values.length-1].compareTo("Yes") == 0) { // add a buggy element o array
+                    if (values[values.length-1].compareTo("Yes") == 0) { // add a buggy element to array
                         buggy[num]++;
                     }
                 }

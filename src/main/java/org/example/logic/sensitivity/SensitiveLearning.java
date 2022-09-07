@@ -14,8 +14,8 @@ public class SensitiveLearning extends Sensitivity {
 
     private void applySensitiveLearning(Instances training) throws ClassificationException {
         try {
-            cost.setCell(0, 1, 1.0);
-            cost.setCell(1, 0, 10.0);
+            cost.setCell(0, 1, 10.0);
+            cost.setCell(1, 0, 1.0);
             csc.setCostMatrix(cost);
             csc.setMinimizeExpectedCost(false);
             csc.setClassifier(fc);

@@ -127,13 +127,13 @@ public class Pipeline {
             eval = new Evaluation(testing, csc.getCostMatrix());
             eval.evaluateModel(csc, testing);
 
-            newResult.setFn(eval.numFalseNegatives(1));
-            newResult.setFp(eval.numFalsePositives(1));
-            newResult.setTp(eval.numTruePositives(1));
-            newResult.setTn(eval.numTrueNegatives(1));
-            newResult.setPrecision(eval.precision(1));
-            newResult.setRecall(eval.recall(1));
-            newResult.setAuc(eval.areaUnderROC(1));
+            newResult.setFn(eval.numFalseNegatives(0));
+            newResult.setFp(eval.numFalsePositives(0));
+            newResult.setTp(eval.numTruePositives(0));
+            newResult.setTn(eval.numTrueNegatives(0));
+            newResult.setPrecision(eval.precision(0));
+            newResult.setRecall(eval.recall(0));
+            newResult.setAuc(eval.areaUnderROC(0));
             newResult.setKappa(eval.kappa());
             results.add(newResult);
         } catch (Exception e) {

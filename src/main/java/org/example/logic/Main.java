@@ -72,8 +72,8 @@ public class Main {
         double percent;
 
         // Distributions of buggy files and files distribution in releases
-        int [] buggy = new int[50];
-        int [] releases = new int[50];
+        int [] buggy = new int[95];
+        int [] releases = new int[95];
 
         List<Record> results =new ArrayList<>();
         try {

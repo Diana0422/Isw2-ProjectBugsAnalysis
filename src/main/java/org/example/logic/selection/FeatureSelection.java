@@ -4,6 +4,9 @@ import org.example.logic.exceptions.DatasetCreationException;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
+/**
+ * Class to pipeline Feature Selection
+ */
 public abstract class FeatureSelection {
 
     protected Instances training;

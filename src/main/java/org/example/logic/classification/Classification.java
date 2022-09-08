@@ -8,6 +8,9 @@ import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 
+/**
+ * Class to pipeline classifier
+ */
 public class Classification {
 
     private Instances training;

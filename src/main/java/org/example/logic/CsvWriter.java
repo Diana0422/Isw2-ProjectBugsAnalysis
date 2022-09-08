@@ -11,6 +11,12 @@ public class CsvWriter {
 
     private CsvWriter() {}
 
+    /**
+     * Writes results into Csv file
+     * @param results the list of records
+     * @param filename the name of the file to write
+     * @throws CsvException if error writing to file
+     */
     public static void writeCsvFile(List<Record> results, String filename) throws CsvException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             if (Main.isFirstFlush()) {

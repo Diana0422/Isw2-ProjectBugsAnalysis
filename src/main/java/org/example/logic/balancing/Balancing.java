@@ -3,6 +3,9 @@ package org.example.logic.balancing;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 
+/**
+ * Class to pipeline Balancing
+ */
 public abstract class Balancing {
 
     private Instances training;

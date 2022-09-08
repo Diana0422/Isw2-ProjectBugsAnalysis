@@ -4,6 +4,9 @@ import weka.classifiers.CostMatrix;
 import weka.classifiers.meta.CostSensitiveClassifier;
 import weka.classifiers.meta.FilteredClassifier;
 
+/**
+ * Class to pipeline Cost Sensitive Classifier
+ */
 public abstract class Sensitivity {
 
     protected CostMatrix cost;

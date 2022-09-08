@@ -10,6 +10,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Class to read the initial dataset in ARFF format
+ */
 public class ArffReader {
 
     private static final String ATTRIBUTE_HEADER = "@attribute";
@@ -115,6 +118,13 @@ public class ArffReader {
         }
     }
 
+    /**
+     * Collects information about the input dataset
+     * @param filenameIn name of file in input
+     * @param releases array that collects number of files for each release
+     * @param buggy array that collects number of buggy for each release
+     * @throws ArffException if error reading file
+     */
     public static void getInfo(String filenameIn, int [] releases, int [] buggy) throws ArffException {
         String line;
         String [] values;

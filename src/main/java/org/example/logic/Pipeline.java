@@ -14,6 +14,9 @@ import weka.core.Instances;
 
 import java.util.List;
 
+/**
+ * Defines the ML pipeline
+ */
 public class Pipeline {
 
     private Balancing balancing;
@@ -26,6 +29,12 @@ public class Pipeline {
         this.results = results;
     }
 
+    /**
+     * Adds balancing methods to the pipeline
+     * @param percent the percentage of training
+     * @param result the record to fill with results
+     * @throws PipelineException
+     */
     public void pipelineBalancing(float percent, Record result) throws PipelineException {
         // balancing
         Balancing balance;
@@ -56,6 +65,12 @@ public class Pipeline {
 
     }
 
+    /**
+     * Adds cost sensitive classifiers to the pipeline
+     * @param c the classifier
+     * @param result the record to fill with results
+     * @throws PipelineException
+     */
     private void pipelineSensitivity(Classification c, Record result) throws PipelineException {
         // sensitivity
         Instances training = c.getTraining();
@@ -83,6 +98,11 @@ public class Pipeline {
         }
     }
 
+    /**
+     * Adds classifiers to the pipeline
+     * @param result the record to fill with results
+     * @throws PipelineException
+     */
     public void pipelineClassification(Record result) throws PipelineException {
 
         try {
@@ -113,6 +133,11 @@ public class Pipeline {
         }
     }
 
+    /**
+     * Activates Weka evaluation and collects results
+     * @param result the record to fill with results
+     * @throws EvaluationException
+     */
     private void evaluation(Record result) throws EvaluationException {
         CostSensitiveClassifier csc = sensitivity.getCostSensitiveClassifier();
         Instances testing = classification.getTesting();
